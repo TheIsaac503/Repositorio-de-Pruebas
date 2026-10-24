@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 EcoReporte Comunitario | ¡Cuidemos nuestro planeta!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --verde-principal: #2ecc71;
+            --verde-oscuro: #27ae60;
+            --verde-claro: #e8f8f0;
+            --blanco: #ffffff;
+            --gris: #f5f7fa;
+            --sombra: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transicion: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f9f0 0%, #e8f8f0 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .contenedor-principal {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .tarjeta-formulario {
+            background: var(--blanco);
+            border-radius: 20px;
+            box-shadow: var(--sombra);
+            padding: 40px;
+            border: 1px solid rgba(46, 204, 113, 0.2);
+            transition: var(--transicion);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .tarjeta-formulario:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .titulo {
+            color: var(--verde-principal);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .emoji-titulo {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+
+        .grupo-formulario {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .grupo-formulario label {
+            font-weight: 600;
+            color: var(--verde-oscuro);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .grupo-formulario label i {
+            color: var(--verde-principal);
+        }
+
+        .campo-formulario {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: var(--transicion);
+            background-color: #fafafa;
+        }
+
+        .campo-formulario:focus {
+            border-color: var(--verde-principal);
+            box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.2);
+            outline: none;
+            background-color: var(--blanco);
+        }
+
+        select.campo-formulario {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 1em;
+            padding-right: 40px;
+        }
+
+        textarea.campo-formulario {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .error-mensaje {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-enviar {
+            background: linear-gradient(135deg, var(--verde-principal) 0%, var(--verde-oscuro) 100%);
+            color: var(--blanco);
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            width: 100%;
+            cursor: pointer;
+            transition: var(--transicion);
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-enviar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+            background: linear-gradient(135deg, var(--verde-oscuro) 0%, #1e8449 100%);
+        }
+
+        .btn-enviar:active {
+            transform: translateY(0);
+        }
+
+        .alerta-exito {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            color: #155724;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .enlace-volver {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: var(--verde-principal);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transicion);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .enlace-volver:hover {
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--verde-oscuro);
+            transform: translateX(5px);
+        }
+
+        .icono-categoria {
+            font-size: 1.2rem;
+            color: var(--verde-principal);
+        }
+
+        /* Decoración adicional */
+        .tarjeta-formulario::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--verde-principal), var(--verde-oscuro), var(--verde-principal));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .contenedor-icono {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .icono-principal {
+            font-size: 4rem;
+            color: var(--verde-principal);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <div class="tarjeta-formulario">
+            <div class="contenedor-icono">
+                <i class="fas fa-globe-americas icono-principal"></i>
+            </div>
+
+            <h1 class="titulo">
+                <span class="emoji-titulo">🌱</span>
+                EcoReporte Comunitario
+            </h1>
+            <p class="subtitulo">
+                <i class="fas fa-hands-helping"></i>
+                ¡Únete al cambio! Reporta problemas ambientales y ayudemos a mantener nuestra comunidad limpia y sostenible
+                <span style="font-size: 1.2em;">💚</span>
+            </p>
+
+            {% if messages %}
+                {% for mensaje in messages %}
+                    <div class="alert alert-success alerta-exito">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>¡Éxito!</strong> {{ mensaje }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ formulario.non_field_errors }}
+
+                <div class="grupo-formulario">
+                    <label class="form-label">
+                        <i class="fas fa-heading"></i>
+                        {{ formulario.Titulo.label }}
+                        <span style="color: var(--verde-principal);">📝</span>
+                    </label>
+                    <input type="text" name="Titulo" class="campo-formulario" value="{{ formulario.Titulo.value|default:'' }}" placeholder="Ej: Contaminación en el río">
+                    {% for error in formulario.Titulo.errors %}
+                        <div class="error-mensaje">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="grupo-formulario">
+                    <label class="form-label">
+                        <i class="fas fa-align-left"></i>
+                        {{ formulario.Descripcion.label }}
+                        <span style="color: var(--verde-principal);">📄</span>
+                    </label>
+                    <textarea name="Descripcion" class="campo-formulario" placeholder="Describe detalladamente el problema ambiental...">{{ formulario.Descripcion.value|default:'' }}</textarea>
+                    {% for error in formulario.Descripcion.errors %}
+                        <div class="error-mensaje">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="grupo-formulario">
+                    <label class="form-label">
+                        <i class="fas fa-map-marker-alt"></i>
+                        {{ formulario.UbicacionReferencial.label }}
+                        <span style="color: var(--verde-principal);">📍</span>
+                    </label>
+                    <input type="text" name="UbicacionReferencial" class="campo-formulario" value="{{ formulario.UbicacionReferencial.value|default:'' }}" placeholder="Ej: Parque Central, cerca del puente">
+                    {% for error in formulario.UbicacionReferencial.errors %}
+                        <div class="error-mensaje">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="grupo-formulario">
+                    <label class="form-label">
+                        <i class="fas fa-tags"></i>
+                        {{ formulario.IdCategoria.label }}
+                        <span style="color: var(--verde-principal);">🏷️</span>
+                    </label>
+                    <select name="IdCategoria" class="campo-formulario">
+                        <option value="" disabled selected>Selecciona una categoría...</option>
+                        {% for choice in formulario.IdCategoria %}
+                            <option value="{{ choice.choice_value }}" {% if choice.selected %}selected{% endif %}>{{ choice.choice_label }}</option>
+                        {% endfor %}
+                    </select>
+                    {% for error in formulario.IdCategoria.errors %}
+                        <div class="error-mensaje">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn btn-enviar">
+                    <i class="fas fa-paper-plane"></i>
+                    Registrar Reporte
+                    <span style="margin-left: 5px;">✨</span>
+                </button>
+            </form>
+
+            <a href="/" class="enlace-volver">
+                <i class="fas fa-arrow-left"></i>
+                Volver al inicio
+            </a>
+        </div>
+    </div>
+</body>
+</html>
